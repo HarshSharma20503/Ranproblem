@@ -5,6 +5,9 @@ const puppeteer = require('puppeteer');
 // Function to make a GET request using Axios
 const getLeetcodeQuestions = async (url) => {
     try {
+
+        console.log("Entered the scraping function")
+
         const currentDate = new Date();
         const year = currentDate.getFullYear();
         const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
@@ -12,16 +15,17 @@ const getLeetcodeQuestions = async (url) => {
         const formattedDate = `${year}-${month}-${day}`;
         console.log(formattedDate);
 
+        console.log("got todays date - ", formattedDate);
 
+        console.log("launching puppeteer");
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
-        await page.setViewport({ width: 1280, height: 720 });
+        console.log("puppeteer launched");
 
-
+        console.log("opening leetcode website");
         const website_url = "https://leetcode.com/problemset/";
         await page.goto(website_url, { waitUntil: "networkidle2" });
-        console.log("Open website");
-        await page.emulateMediaType("screen");
+        console.log("website opened");
 
         const pageData = await page.evaluate(() => {
             return {
