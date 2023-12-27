@@ -18,7 +18,7 @@ const getLeetcodeQuestions = async (url) => {
         console.log("got todays date - ", formattedDate);
 
         console.log("launching puppeteer");
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ headless: "new" });
         const page = await browser.newPage();
         console.log("puppeteer launched");
 
