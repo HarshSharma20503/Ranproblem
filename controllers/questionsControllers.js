@@ -30,7 +30,7 @@ const getCodeforces = asyncHandler(async (req, res) => {
 
         // Create the URL for the randomly selected problem
         const problemUrl = `https://codeforces.com/problemset/problem/${contestId}/${index}`;
-
+        console.log(problemUrl);
         // Return the URL in a JSON response
         res.status(200).json({ "problemUrl": problemUrl });
     } catch (error) {
@@ -45,11 +45,10 @@ const getCodeforces = asyncHandler(async (req, res) => {
 const getLeetcode = asyncHandler(async (req, res) => {
     try {
         const problemUrl = await getLeetcodeQuestions("https://leetcode.com/problemset/")
-        if(problemUrl == null)
-        {
-            res.status(500).json({"problemUrl":null});
+        if (problemUrl == null) {
+            res.status(500).json({ "problemUrl": null });
         }
-        res.status(200).json({"problemUrl": problemUrl});
+        res.status(200).json({ "problemUrl": problemUrl });
     } catch (error) {
         // Handle any errors that occur during the execution of the function
         res.status(500).json({ error: error.message });
