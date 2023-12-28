@@ -22,16 +22,38 @@ const getLeetcodeQuestions = async (url) => {
             headless: true,
             executablePath: './.cache/puppeteer/chrome/linux-119.0.6045.105/chrome-linux64/chrome',
             args: [
-                '--enable-audio',
-                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+                '--disable-web-security',          // Disable web security
+                '--no-sandbox',                   // Disable sandboxing
+                '--disable-setuid-sandbox',       // Disable setuid sandbox (Linux)
+                '--disable-dev-shm-usage',        // Disable /dev/shm usage (Linux)
+                '--disable-gpu',                  // Disable GPU acceleration
+                '--disable-software-rasterizer',  // Disable software rasterizer
+                '--disable-background-timer-throttling',
+                '--disable-backgrounding-occluded-windows',
+                '--disable-renderer-backgrounding',
+                '--disable-breakpad',             // Disable crash reports
+                '--disable-client-side-phishing-detection',
+                '--disable-ipc-flooding-protection',
+                '--disable-infobars',             // Disable info bars
+                '--disable-notifications',        // Disable notifications
+                '--disable-offer-store-unmasked-wallet-cards',
+                '--disable-popup-blocking',       // Disable popup blocking
+                '--disable-prompt-on-repost',
+                '--disable-sync',                 // Disable syncing to a Google account
+                '--enable-automation',            // Enable automation
+                '--mute-audio',                   // Mute audio
+                '--hide-scrollbars',              // Hide scrollbars
+                '--ignore-certificate-errors',    // Ignore certificate errors
+                '--ignore-certificate-errors-spki-list',
+                '--window-size=1366x768',         // Set window size
+                '--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             ]
         });
         const page = await browser.newPage();
         console.log("puppeteer launched");
 
         console.log("opening leetcode website");
-        const website_url = "https://leetcode.com/problemset/";
-        await page.goto(website_url, { waitUntil: "networkidle2" });
+        await page.goto("https://leetcode.com/problemset/", { waitUntil: "networkidle2" });
         console.log("website opened");
 
         const pageData = await page.evaluate(() => {
