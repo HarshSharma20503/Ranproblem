@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "postinstall": "/usr/bin/pip3 install requests beautifulsoup4"
+    "postinstall": "pip3 install requests beautifulsoup4"
   },
   "author": "Harsh Sharma",
   "license": "MIT",
