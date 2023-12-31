@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 app.get('/api/randomQuestion', (req, res) => {
 
 });
+
 app.use("/api/randomQuestion", require("./routes/questionsRoutes"));
 
 app.listen(PORT, () => {

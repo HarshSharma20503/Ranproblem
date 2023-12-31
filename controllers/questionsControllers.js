@@ -2,9 +2,10 @@
 const asyncHandler = require("express-async-handler");
 const getCodeforcesQuestions = require("../scrape/getCodeforcesQuestions");
 const getLeetcodeQuestions = require("../scrape/getLeetcodeQuestions");
+const getCodechefQuestions = require("../scrape/getCodechefQuestions");
 
 //@desc Get random question from Codeforces
-//@route GET /api/contacts
+//@route GET /api/randomQuestion/getCodeforces
 //@access public
 // Async function using asyncHandler to handle asynchronous operations and errors
 const getCodeforces = asyncHandler(async (req, res) => {
@@ -40,7 +41,7 @@ const getCodeforces = asyncHandler(async (req, res) => {
 });
 
 //@desc Get random question from Leetcode
-//@route POST /api/contacts
+//@route GET /api/randomQuestion/getLeetcode
 //@access public
 const getLeetcode = asyncHandler(async (req, res) => {
     try {
@@ -56,15 +57,35 @@ const getLeetcode = asyncHandler(async (req, res) => {
     }
 });
 
+//follow the same pattern for codechef
+
+//@desc Get random question from Codechef
+//@route GET /api/randomQuestion/getCodechef
+//@access public
+const getCodechef = asyncHandler(async (req, res) => {
+    try {
+        const problemUrl = await getCodechefQuestions()
+        console.log("Leetcode ProblemUrl: ", problemUrl);
+        if (problemUrl == null) {
+            res.status(500).json({ "problemUrl": null });
+        }
+        res.status(200).json({ "problemUrl": problemUrl });
+    }
+    catch (error) {
+        // Handle any errors that occur during the execution of the function
+        res.status(500).json({ error: error.message });
+    }
+});
+
 //@desc Get random question from Atcoder
-//@route GET /api/contacts/:id
+//@route GET /api/randomQuestion/getAtcoder
 //@access public
 const getAtcoder = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Get Atcoder Question" });
 });
 
 //@desc get one random question from from one of the 3 platform
-//@route PUT /api/contacts/:id
+//@route GET /api/randomQuestion/getQuestion
 //@access public
 const getQuestion = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Get random Question" });
@@ -76,4 +97,5 @@ module.exports = {
     getLeetcode,
     getAtcoder,
     getQuestion,
+    getCodechef
 };
