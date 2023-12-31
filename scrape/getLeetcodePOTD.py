@@ -28,4 +28,4 @@ def get_problem_links():
 
 problem_links = get_problem_links()
 if problem_links:
-    print(problem_links[-1])
+    print(problem_links[-1])  # Print the last problem link
