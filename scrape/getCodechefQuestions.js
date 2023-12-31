@@ -11,11 +11,12 @@ const getCodechefQuestions = async () => {
         puppeteer.use(StealthPlugin());
 
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             args: [
                 '--enable-audio', // Enable audio
                 '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-            ]
+            ],
+            executablePath: './.cache/puppeteer/chrome/linux-119.0.6045.105/chrome-linux64/chrome'
         });
         const page = await browser.newPage();
 
