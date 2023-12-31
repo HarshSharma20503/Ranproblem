@@ -3,11 +3,13 @@ const { spawn } = require('child_process');
 const getLeetcodeQuestions = async (url) => {
     try {
         const childProcess = spawn('python3', ['scrape/getLeetcodePOTD.py']);
-        let output = ''; // variable to hold the data
+        let output = 'https://leetcode.com'; // variable to hold the data
 
         childProcess.stdout.on('data', (data) => {
             console.log('Getting from python stdout:', data.toString());
             output += data.toString(); // append the data to the output variable
+            //remove last character from output string
+            output = output.slice(0, -1);
         });
 
         childProcess.stderr.on('data', (data) => {
